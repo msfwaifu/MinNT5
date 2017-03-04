@@ -544,7 +544,7 @@ Language=English
 
 MessageId=0x007E Facility=Kernel Severity=None SymbolicName=WINDOWS_NT_BANNER
 Language=English
-Windows OpenNT Version %s (Build %u%s)
+Windows OpenNT Alpha 1 Version %s (Build %u%s)
 .
 
 MessageId=0x007F Facility=Kernel Severity=Fatal SymbolicName=UNEXPECTED_KERNEL_MODE_TRAP
