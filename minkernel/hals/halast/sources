@@ -1,0 +1,75 @@
+!IF 0
+
+Copyright (c) 1989-2000  Microsoft Corporation
+
+!ENDIF
+
+!include $(PROJECT_ROOT)\hals\hals.inc
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=halast
+TARGETPATH=obj
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+NT_UP=0
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+SOURCES=
+
+x86_SOURCES=hal.rc             \
+            drivesup.c         \
+            bushnd.c           \
+            rangesup.c         \
+            x86\ixbeep.asm     \
+            x86\ixbusdat.c     \
+            x86\ixdat.c        \
+            x86\ixisabus.c     \
+            x86\ixcmos.asm     \
+            x86\ixenvirv.c     \
+            x86\ixfirm.c       \
+            x86\ixhwsup.c      \
+            x86\ixidle.asm     \
+            x86\ixinfo.c       \
+            x86\ixisasup.c     \
+            x86\ixkdcom.c      \
+            x86\ixphwsup.c     \
+            x86\ixreboot.c     \
+            x86\ixswint.asm    \
+            x86\ixthunk.c      \
+            x86\ixusage.c      \
+            x86\xxbiosa.asm    \
+            x86\xxbiosc.c      \
+            x86\xxdisp.c       \
+            x86\xxioacc.asm    \
+            x86\xxkdsup.c      \
+            x86\xxmemory.c     \
+            x86\xxstubs.c      \
+            x86\xxtime.c       \
+            x86\spspin.asm     \
+            x86\spprofil.asm   \
+            x86\astdetct.c     \
+            x86\astebi.c       \
+            x86\asthal.c       \
+            x86\astipirq.c     \
+            x86\astebini.c     \
+            x86\astipi.asm     \
+            x86\astclock.asm   \
+            x86\astirql.asm    \
+            x86\astsyint.asm   \
+            x86\astproc.c      \
+            x86\astmpint.c     \
+            x86\astspi.asm     \
+            x86\aststall.asm   \
+            x86\astproca.asm   \
+            x86\astnmi.c
+
+DLLDEF=$(O)\hal.def

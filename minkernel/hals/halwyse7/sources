@@ -1,0 +1,70 @@
+!IF 0
+
+Copyright (c) 1989-2000  Microsoft Corporation
+
+!ENDIF
+
+!include $(PROJECT_ROOT)\hals\hals.inc
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=halwyse7
+TARGETPATH=obj
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+NT_UP=0
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+SOURCES=
+
+INCLUDES=$(INCLUDES)
+
+X86_SOURCES=hal.rc             \
+            drivesup.c         \
+            bushnd.c           \
+            rangesup.c         \
+            x86\ixbeep.asm    \
+            x86\ixbusdat.c    \
+            x86\ixdat.c       \
+            x86\ixisabus.c    \
+            x86\ixcmos.asm    \
+            x86\ixenvirv.c    \
+            x86\ixfirm.c      \
+            x86\ixhwsup.c     \
+            x86\ixidle.asm    \
+            x86\ixinfo.c      \
+            x86\ixisasup.c    \
+            x86\ixkdcom.c     \
+            x86\ixphwsup.c    \
+            x86\ixreboot.c    \
+            x86\ixthunk.c     \
+            x86\ixusage.c     \
+            x86\xxbiosa.asm   \
+            x86\xxbiosc.c     \
+            x86\xxdisp.c      \
+            x86\xxioacc.asm   \
+            x86\xxkdsup.c     \
+            x86\xxmemory.c    \
+            x86\xxstubs.c     \
+            x86\xxtime.c      \
+            x86\wyclock.asm   \
+            x86\wyhal.c       \
+            x86\wyipi.asm     \
+            x86\wyirql.asm    \
+            x86\wymapint.c    \
+            x86\wynmi.asm     \
+            x86\wyspin.asm    \
+            x86\wysproc.c     \
+            x86\wysproca.asm  \
+            x86\wyswint.asm   \
+            x86\wysysint.asm
+
+DLLDEF=$(O)\hal.def

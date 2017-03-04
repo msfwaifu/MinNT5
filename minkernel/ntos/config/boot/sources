@@ -1,0 +1,43 @@
+# ======== $(PROJECT_ROOT)\boot\loader.inc ========
+
+!IF "$(ENABLE_LOADER_DEBUG)" != ""
+C_DEFINES=$(C_DEFINES) -DENABLE_LOADER_DEBUG="\"$(ENABLE_LOADER_DEBUG)"\"
+!else
+# Only allow MSC_OPTIMIZATION to be changed if the debugger is enabled
+# otherwise, no_opt razzle windows won't be able to boot (loader too big)
+MSC_OPTIMIZATION=$(DEFAULT_MSC_OPT)
+!ENDIF
+
+VC7_SYMBOLS=1
+
+# No overflow checking for the loader
+BUFFER_OVERFLOW_CHECKS=0
+
+# =================================================
+#!include $(PROJECT_ROOT)\boot\loader.inc
+
+MAJORCOMP=ntos
+MINORCOMP=config
+
+TARGETNAME=bconfig
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=..;..\..\inc;$(BASE_INC_PATH);$(MINWIN_INC_PATH)
+
+C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_
+
+SOURCES=..\cmboot.c    \
+        ..\cmchek.c    \
+        ..\cmdat.c     \
+        ..\cmdat2.c    \
+        ..\cmindex.c   \
+        ..\cmname.c    \
+        ..\cmtree.c    \
+        ..\hivecell.c  \
+        ..\hivechek.c  \
+        ..\hiveinit.c  \
+        ..\hivesum.c   \
+        ..\hivemap.c
+
+UMTYPE=console

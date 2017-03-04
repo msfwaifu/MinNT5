@@ -1,0 +1,75 @@
+!IF 0
+
+Copyright (c) 1989-2000  Microsoft Corporation
+
+!ENDIF
+
+!include $(PROJECT_ROOT)\hals\hals.inc
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=hal
+TARGETPATH=obj
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+PASS1_PUBLISH={$(O)\hal.lib=$(DDK_LIB_PATH)\hal.lib}
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+SOURCES=
+
+X86_SOURCES= \
+    hal.rc            \
+    drivesup.c        \
+    bushnd.c          \
+    rangesup.c        \
+    x86\ixbeep.asm    \
+    x86\ixbusdat.c    \
+    x86\ixclock.asm   \
+    x86\ixcmos.asm    \
+    x86\ixdat.c       \
+    x86\ixenvirv.c    \
+    x86\ixfirm.c      \
+    x86\ixhwsup.c     \
+    x86\ixidle.asm    \
+    x86\ixinfo.c      \
+    x86\ixipi.asm     \
+    x86\ixirql.asm    \
+    x86\ixisabus.c    \
+    x86\ixisasup.c    \
+    x86\ixkdcom.c     \
+    x86\ixlock.asm    \
+    x86\ixmca.c       \
+    x86\ixmcaa.asm    \
+    x86\ixnmi.c       \
+    x86\ixpcibus.c    \
+    x86\ixpciint.c    \
+    x86\ixpcibrd.c    \
+    x86\ixphwsup.c    \
+    x86\ixprofil.asm  \
+    x86\ixproc.c      \
+    x86\ixsysbus.c    \
+    x86\ixthunk.asm   \
+    x86\ixreboot.c    \
+    x86\ixstall.asm   \
+    x86\ixswint.asm   \
+    x86\ixsysint.asm  \
+    x86\ixusage.c     \
+    x86\xxbiosa.asm   \
+    x86\xxbiosc.c     \
+    x86\xxdisp.c      \
+    x86\xxhal.c       \
+    x86\xxioacc.asm   \
+    x86\xxkdsup.c     \
+    x86\xxmemory.c    \
+    x86\xxstubs.c     \
+    x86\xxtime.c
+
+DLLDEF=$(O)\hal.def

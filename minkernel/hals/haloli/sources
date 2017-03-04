@@ -1,0 +1,71 @@
+!IF 0
+
+Copyright (c) 1989-2000  Microsoft Corporation
+
+!ENDIF
+
+!include $(PROJECT_ROOT)\hals\hals.inc
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=haloli
+TARGETPATH=obj
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+NT_UP=0
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+INCLUDES=$(INCLUDES)
+
+SOURCES=
+
+X86_SOURCES=hal.rc             \
+            drivesup.c         \
+            bushnd.c           \
+            rangesup.c         \
+            x86\ixbeep.asm     \
+            x86\ixbusdat.c     \
+            x86\ixdat.c        \
+            x86\ixisabus.c     \
+            x86\ixcmos.asm     \
+            x86\ixenvirv.c     \
+            x86\ixfirm.c       \
+            x86\ixhwsup.c      \
+            x86\ixidle.asm     \
+            x86\ixinfo.c       \
+            x86\ixisasup.c     \
+            x86\ixkdcom.c      \
+            x86\ixnmi.c        \
+            x86\ixphwsup.c     \
+            x86\ixswint.asm    \
+            x86\ixthunk.c      \
+            x86\ixreboot.c     \
+            x86\ixusage.c      \
+            x86\xxbiosa.asm    \
+            x86\xxbiosc.c      \
+            x86\xxdisp.c       \
+            x86\xxhal.c        \
+            x86\xxioacc.asm    \
+            x86\xxkdsup.c      \
+            x86\xxmemory.c     \
+            x86\xxstubs.c      \
+            x86\xxtime.c       \
+            x86\spspin.asm     \
+            x86\oliclock.asm   \
+            x86\oliirql.asm    \
+            x86\oliipi.asm     \
+            x86\olisyint.asm   \
+            x86\olimapin.c     \
+            x86\olisproc.c     \
+            x86\oliproca.asm
+
+
+DLLDEF=$(O)\hal.def

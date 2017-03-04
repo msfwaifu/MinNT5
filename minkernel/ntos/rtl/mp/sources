@@ -1,0 +1,63 @@
+!include $(PROJECT_ROOT)\ntos\ntoskrnl.inc
+
+MAJORCOMP=ntos
+MINORCOMP=krtl
+
+NT_UP=0
+
+TARGETNAME=ntosrtl
+TARGETTYPE=LIBRARY
+TARGETPATH=obj
+
+BUILD_PRODUCES=ntosrtl$(NT_UP)
+
+GPSIZE=32
+
+INCLUDES=..;..\..\inc;$(BASE_INC_PATH);$(MINWIN_INC_PATH)
+
+C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_ -DNTOS_KERNEL_RUNTIME=1
+
+ASM_DEFINES=-DNTOS_KERNEL_RUNTIME=1
+
+SOURCES=..\acledit.c   \
+        ..\assert.c    \
+        ..\atom.c      \
+        ..\bitmap.c    \
+        ..\compress.c  \
+        ..\cnvint.c    \
+        ..\debug.c     \
+        ..\eballoc.c   \
+        ..\environ.c   \
+        ..\error.c     \
+        ..\excptdbg.c  \
+        ..\gentable.c  \
+        ..\gen8dot3.c  \
+        ..\heap.c      \
+        ..\imagedir.c  \
+        ..\checksum.c  \
+        ..\ldrrsrc.c   \
+        ..\ldrreloc.c  \
+        ..\lznt1.c     \
+        ..\message.c   \
+        ..\nls.c       \
+        ..\pctohdr.c   \
+        ..\prefix.c    \
+        ..\prodtype.c  \
+        ..\random.c    \
+        ..\registry.c  \
+        ..\regutil.c   \
+        ..\rtlassig.c  \
+        ..\rtldata.c   \
+        ..\rtlexec.c   \
+        ..\rxact.c     \
+        ..\sertl.c     \
+        ..\splay.c     \
+        ..\string.c    \
+        ..\stktrace.c  \
+        ..\time.c      \
+        ..\nlsxlat.c   \
+        ..\trace.c
+
+UMTYPE=console
+
+NTTARGETFILE0=..\error.c

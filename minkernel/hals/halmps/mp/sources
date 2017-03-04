@@ -1,0 +1,30 @@
+!IF 0
+
+Copyright (c) 1989-2000  Microsoft Corporation
+
+!ENDIF
+
+!include $(PROJECT_ROOT)\hals\hals.inc
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=halmps
+TARGETPATH=obj
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+NT_UP=0
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+INCLUDES=$(INCLUDES);..;..\x86
+
+SOURCES=
+
+DLLDEF=$(O)\hal.def

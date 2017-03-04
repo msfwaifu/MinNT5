@@ -1,0 +1,24 @@
+MAJORCOMP=ntos
+MINORCOMP=dbgk
+
+TARGETNAME=dbgk
+TARGETTYPE=LIBRARY
+TARGETPATH=obj
+
+BUILD_PRODUCES=ntosdbgk$(NT_UP)
+
+MIPS_OPTIONS=-nodwalign
+GPSIZE=32
+
+INCLUDES=..;..\..\inc;$(BASE_INC_PATH);$(MINWIN_INC_PATH)
+
+MSC_WARNING_LEVEL=/W4 /WX
+
+C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_
+
+SOURCES=..\dbgkport.c \
+        ..\dbgkproc.c
+
+UMTEST=udbgk
+
+SOURCES_USED=..\sources.inc

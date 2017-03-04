@@ -1,0 +1,50 @@
+//
+// MinWin Public Aliases
+//
+
+admin           cd /d %NTROOT%\admin
+
+base            cd /d %NTROOT%\base
+
+com             cd /d %NTROOT%\com
+
+drivers         cd /d %NTROOT%\drivers
+
+ds              cd /d %NTROOT%\ds
+
+enduser         cd /d %NTROOT%\enduser
+
+inetcore        cd /d %NTROOT%\inetcore
+
+inetsrv         cd /d %NTROOT%\inetsrv
+
+mergedcomp      cd /d %NTROOT%\mergedcomponents
+
+minkernel       cd /d %NTROOT%\minkernel
+crts            cd /d %NTROOT%\minkernel\crts
+hals            cd /d %NTROOT%\minkernel\hals
+ntos            cd /d %NTROOT%\minkernel\ntos
+subsys          cd /d %NTROOT%\minkernel\subsys
+
+multimedia      cd /d %NTROOT%\multimedia
+
+net             cd /d %NTROOT%\net
+
+printscan       cd /d %NTROOT%\printscan
+
+public          cd /d %NTROOT%\public
+sdk             cd /d %NTROOT%\public\sdk
+sdkinc          cd /d %NTROOT%\public\sdk\inc
+sdklib          cd /d %NTROOT%\public\sdk\lib\%NTARCH%
+ddk             cd /d %NTROOT%\public\ddk
+ddkinc          cd /d %NTROOT%\public\ddk\inc
+ddklib          cd /d %NTROOT%\public\ddk\lib\%NTARCH%
+internal        cd /d %NTROOT%\public\internal
+
+sdktools        cd /d %NTROOT%\sdktools
+
+shell           cd /d %NTROOT%\shell
+
+termsrv         cd /d %NTROOT%\termsrv
+
+windows         cd /d %NTROOT%\windows

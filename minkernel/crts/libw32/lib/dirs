@@ -1,0 +1,10 @@
+DIRS= \
+     nt     \
+     posix  \
+     st     \
+     mt     \
+     dll    \
+     dlllib \
+!if $(X86)
+     dll40
+!endif

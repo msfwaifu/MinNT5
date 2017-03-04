@@ -1,0 +1,28 @@
+!IF 0
+
+Copyright (c) Microsoft Corporation
+
+!ENDIF
+
+!include $(PROJECT_ROOT)\ntos\ntoskrnl.inc
+
+NT_UP=0
+
+!include ..\up\sources
+
+!undef NTTEST
+NTTEST=ntkrnlmp
+TARGET1=mp
+TARGET2=mp
+
+!ifndef NTTEST
+NTTEST=ntkrnlmp
+!endif
+
+!include ..\up\sources.cmn
+
+!if $(X86)
+KERNEL_ALIGNMENT=0x1000
+!endif
+
+SYNCHRONIZE_DRAIN=1

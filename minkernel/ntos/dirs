@@ -1,0 +1,23 @@
+DIRS= \
+    cache   \
+    config  \
+    dbgk    \
+    ex      \
+    fsrtl   \
+    fstub   \
+    io      \
+    kd      \
+    ke      \
+    lpc     \
+    mm      \
+    nls     \
+    ob      \
+    po      \
+    ps      \
+    raw     \
+    rtl     \
+    se      \
+    vdm     \
+    init
+
+OPTIONAL_DIRS=

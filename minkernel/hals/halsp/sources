@@ -1,0 +1,80 @@
+!IF 0
+
+Copyright (c) 1989-2000  Microsoft Corporation
+
+!ENDIF
+
+!include $(PROJECT_ROOT)\hals\hals.inc
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=halsp
+TARGETPATH=obj
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+NT_UP=0
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+INCLUDES=$(INCLUDES);..
+
+SOURCES=
+
+X86_SOURCES=hal.rc             \
+            drivesup.c         \
+            bushnd.c           \
+            rangesup.c         \
+            x86\ixbusdat.c    \
+            x86\ixcmos.asm    \
+            x86\ixdat.c       \
+            x86\ixenvirv.c    \
+            x86\ixfirm.c      \
+            x86\ixhwsup.c     \
+            x86\ixidle.asm    \
+            x86\ixinfo.c      \
+            x86\ixisabus.c    \
+            x86\ixisasup.c    \
+            x86\ixkdcom.c     \
+            x86\ixmca.c       \
+            x86\ixmcaa.asm    \
+            x86\ixnmi.c       \
+            x86\ixphwsup.c    \
+            x86\ixpcibus.c    \
+            x86\ixpciint.c    \
+            x86\ixpcibrd.c    \
+            x86\ixstall.asm   \
+            x86\ixthunk.c     \
+            x86\ixreboot.c    \
+            x86\ixusage.c     \
+            x86\xxbiosa.asm   \
+            x86\xxbiosc.c     \
+            x86\xxdisp.c      \
+            x86\xxhal.c       \
+            x86\xxioacc.asm   \
+            x86\xxkdsup.c     \
+            x86\xxmemory.c    \
+            x86\xxstubs.c     \
+            x86\xxtime.c      \
+            x86\spacer.c      \
+            x86\spclock.asm   \
+            x86\spbeep.asm    \
+            x86\spipi.asm     \
+            x86\spirql.asm    \
+            x86\spsysbus.c    \
+            x86\spsysint.asm  \
+            x86\spprofil.asm  \
+            x86\spreboot.asm  \
+            x86\spspin.asm    \
+            x86\spsproc.c     \
+            x86\spsproca.asm  \
+            x86\spswint.asm
+
+
+DLLDEF=$(O)\hal.def

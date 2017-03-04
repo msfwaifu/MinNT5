@@ -1,0 +1,2 @@
+X86_SOURCES=..\x86\init386.c     \
+            ..\x86\initdat.c
