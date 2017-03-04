@@ -1195,7 +1195,7 @@ Notes:
 //
 // MessageText:
 //
-//  Windows OpenNT Version %s (Build %u%s)
+//  Windows OpenNT Alpha 1 Version %s (Build %u%s)
 //
 #define WINDOWS_NT_BANNER                ((ULONG)0x4000007EL)
 
