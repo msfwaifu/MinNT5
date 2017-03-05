@@ -57,11 +57,89 @@ Revision History:
 #define RESTRICTED_POINTER
 #endif
 
-#if defined(_M_MRX000) || defined(_M_ALPHA) || defined(_M_PPC)
+#if defined(_M_MRX000) || defined(_M_ALPHA) || defined(_M_PPC) || defined(_M_IA64) || defined(_M_AMD64)
 #define UNALIGNED __unaligned
+#if defined(_WIN64)
+#define UNALIGNED64 __unaligned
+#else
+#define UNALIGNED64
+#endif
 #else
 #define UNALIGNED
+#define UNALIGNED64
 #endif
+
+
+#if defined(_WIN64) || defined(_M_ALPHA)
+#define MAX_NATURAL_ALIGNMENT sizeof(ULONGLONG)
+#define MEMORY_ALLOCATION_ALIGNMENT 16
+#else
+#define MAX_NATURAL_ALIGNMENT sizeof(ULONG)
+#define MEMORY_ALLOCATION_ALIGNMENT 8
+#endif
+
+//
+// TYPE_ALIGNMENT will return the alignment requirements of a given type for
+// the current platform.
+//
+
+#ifdef __cplusplus
+#if _MSC_VER >= 1300
+#define TYPE_ALIGNMENT( t ) __alignof(t)
+#endif
+#else
+#define TYPE_ALIGNMENT( t ) \
+    FIELD_OFFSET( struct { char x; t test; }, test )
+#endif
+
+#if defined(_WIN64)
+
+#define PROBE_ALIGNMENT( _s ) (TYPE_ALIGNMENT( _s ) > TYPE_ALIGNMENT( ULONG ) ? \
+                               TYPE_ALIGNMENT( _s ) : TYPE_ALIGNMENT( ULONG ))
+
+#define PROBE_ALIGNMENT32( _s ) TYPE_ALIGNMENT( ULONG )
+
+#else
+
+#define PROBE_ALIGNMENT( _s ) TYPE_ALIGNMENT( ULONG )
+
+#endif
+
+//
+// C_ASSERT() can be used to perform many compile-time assertions:
+//            type sizes, field offsets, etc.
+//
+// An assertion failure results in error C2118: negative subscript.
+//
+
+#define C_ASSERT(e) typedef char __C_ASSERT__[(e)?1:-1]
+
+#if !defined(_MAC) && (defined(_M_MRX000) || defined(_M_AMD64) || defined(_M_IA64)) && (_MSC_VER >= 1100) && !(defined(MIDL_PASS) || defined(RC_INVOKED))
+#define POINTER_64 __ptr64
+typedef unsigned __int64 POINTER_64_INT;
+#if defined(_WIN64)
+#define POINTER_32 __ptr32
+#else
+#define POINTER_32
+#endif
+#else
+#if defined(_MAC) && defined(_MAC_INT_64)
+#define POINTER_64 __ptr64
+typedef unsigned __int64 POINTER_64_INT;
+#else
+#define POINTER_64
+typedef unsigned long POINTER_64_INT;
+#endif
+#define POINTER_32
+#endif
+
+#if defined(_IA64_) || defined(_AMD64_)
+#define FIRMWARE_PTR
+#else
+#define FIRMWARE_PTR POINTER_32
+#endif
+
+#include <basetsd.h>
 
 // end_winnt
 
@@ -71,19 +149,117 @@ Revision History:
 
 // begin_winnt
 
-#if (defined(_M_MRX000) || defined(_M_IX86) || defined(_M_ALPHA) || defined(_M_PPC)) && !defined(MIDL_PASS)
+#if (defined(_M_IX86) || defined(_M_IA64) || defined(_M_AMD64)) && !defined(MIDL_PASS)
 #define DECLSPEC_IMPORT __declspec(dllimport)
 #else
 #define DECLSPEC_IMPORT
 #endif
 
+#ifndef DECLSPEC_NORETURN
+#if (_MSC_VER >= 1200) && !defined(MIDL_PASS)
+#define DECLSPEC_NORETURN   __declspec(noreturn)
+#else
+#define DECLSPEC_NORETURN
+#endif
+#endif
+
+#ifndef DECLSPEC_ALIGN
+#if (_MSC_VER >= 1300) && !defined(MIDL_PASS)
+#define DECLSPEC_ALIGN(x)   __declspec(align(x))
+#else
+#define DECLSPEC_ALIGN(x)
+#endif
+#endif
+
+#ifndef DECLSPEC_CACHEALIGN
+#define DECLSPEC_CACHEALIGN DECLSPEC_ALIGN(128)
+#endif
+
+#ifndef DECLSPEC_UUID
+#if (_MSC_VER >= 1100) && defined (__cplusplus)
+#define DECLSPEC_UUID(x)    __declspec(uuid(x))
+#else
+#define DECLSPEC_UUID(x)
+#endif
+#endif
+
+#ifndef DECLSPEC_NOVTABLE
+#if (_MSC_VER >= 1100) && defined(__cplusplus)
+#define DECLSPEC_NOVTABLE   __declspec(novtable)
+#else
+#define DECLSPEC_NOVTABLE
+#endif
+#endif
+
+#ifndef DECLSPEC_SELECTANY
+#if (_MSC_VER >= 1100)
+#define DECLSPEC_SELECTANY  __declspec(selectany)
+#else
+#define DECLSPEC_SELECTANY
+#endif
+#endif
+
+#ifndef NOP_FUNCTION
+#if (_MSC_VER >= 1210)
+#define NOP_FUNCTION __noop
+#else
+#define NOP_FUNCTION (void)0
+#endif
+#endif
+
+#ifndef DECLSPEC_ADDRSAFE
+#if (_MSC_VER >= 1200) && (defined(_M_ALPHA) || defined(_M_AXP64))
+#define DECLSPEC_ADDRSAFE  __declspec(address_safe)
+#else
+#define DECLSPEC_ADDRSAFE
+#endif
+#endif
+
+#ifndef FORCEINLINE
+#if (_MSC_VER >= 1200)
+#define FORCEINLINE __forceinline
+#else
+#define FORCEINLINE __inline
+#endif
+#endif
+
+#ifndef DECLSPEC_DEPRECATED
+#if (_MSC_VER >= 1300) && !defined(MIDL_PASS)
+#define DECLSPEC_DEPRECATED   __declspec(deprecated)
+#define DEPRECATE_SUPPORTED
+#else
+#define DECLSPEC_DEPRECATED
+#undef  DEPRECATE_SUPPORTED
+#endif
+#endif
+
 // end_winnt
+
+#ifdef DEPRECATE_DDK_FUNCTIONS
+#ifdef _NTDDK_
+#define DECLSPEC_DEPRECATED_DDK DECLSPEC_DEPRECATED
+#ifdef DEPRECATE_SUPPORTED
+#define PRAGMA_DEPRECATED_DDK 1
+#endif
+#else
+#define DECLSPEC_DEPRECATED_DDK
+#define PRAGMA_DEPRECATED_DDK 1
+#endif
+#else
+#define DECLSPEC_DEPRECATED_DDK
+#define PRAGMA_DEPRECATED_DDK 0
+#endif
+
 
 //
 // Void
 //
+// begin_winnt
 
 typedef void *PVOID;    // winnt
+typedef void * POINTER_64 PVOID64;
+
+// end_winnt
 
 // end_ntminiport end_ntndis end_ntminitape
 

@@ -19,6 +19,9 @@
 extern "C"{
 #endif 
 
+/* header files for imported files */
+#include "basetsd.h"
+
 /* Forward Declarations */ 
 
 void __RPC_FAR * __RPC_USER MIDL_user_allocate(size_t);

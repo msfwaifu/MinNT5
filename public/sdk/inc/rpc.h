@@ -23,6 +23,8 @@ Abstract:
 extern "C" {
 #endif
 
+#include <basetsd.h>
+
 #define __RPC_WIN32__
 #define __RPC_NT__
 

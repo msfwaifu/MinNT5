@@ -56,6 +56,7 @@ Revision History:
 #define _MAC_
 #endif
 
+#include <basetsd.h>
 #include <rpcnsip.h>
 
 #ifdef __cplusplus
